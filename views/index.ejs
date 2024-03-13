@@ -1,5 +1,25 @@
 <%- include("partials/header.ejs") %>
 
-<h1>Hello, World!</h1>
+<form action="/play" method="GET">
+  <p>Game Mode</p>
+  <label>Local Multiplayer</label>
+  <input type="radio" name="gamemode" value="multiplayer" required />
+  <label>Against Robot</label>
+  <input type="radio" name="gamemode" value="robot" />
+
+  <p>Game Board</p>
+  <label>Normal 3x3 Grid</label>
+  <input type="radio" name="gameboard" value="normal" required />
+  <label>Crazy 5x5 Grid</label>
+  <input type="radio" name="gameboard" value="crazy" />
+  
+  <p>Player 1 Go First?</p>
+  <label>Yes</label>
+  <input type="radio" name="player1turn" value="yes" required />
+  <label>No</label>
+  <input type="radio" name="player1turn" value="no" />
+
+  <input type="submit" value="Submit" />
+</form>
 
 <%- include("partials/footer.ejs") %>
