@@ -9,8 +9,9 @@ app.use(express.static("public"));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.get("/play", function (req, res) {
+app.post("/play", function (req, res) {
     isStartingPage = false;
+    console.log(req.body);
     res.render("normal_grid.ejs", { "isStartingPage": isStartingPage });
 });
 

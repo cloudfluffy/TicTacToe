@@ -1,35 +1,32 @@
 <%- include("partials/header.ejs") %>
 
-<form action="/play" method="GET">
+<form action="/play" method="POST">
 
-  <div class = "Game_Mode">
   <p>Game Mode</p>
-  <input type="radio" id = "multiplayer" name="gamemode" value="multiplayer" required />
-  <label for="multiplayer">Local Multiplayer</label>
-  <input type="radio" id = "robot" name="gamemode" value="robot" />
-  <label for="robot">Against Robot</label>
-  </div>  
-
-  <div class = "Game_Board">
-  <p>Game Board</p>
-  <input type="radio" id = "normal" name="gameboard" value="normal" required />
-  <label for = "normal">Normal 3x3 Grid</label>
-  <input type="radio" id = "crazy" name="gameboard" value="crazy"  />
-  <label for = "crazy">Crazy 5x5 Grid</label>
+  <div>
+    <input type="radio" id="multiplayer" name="gamemode" value="multiplayer" required />
+    <label class="space" for="multiplayer">Local Multiplayer</label>
+    <input type="radio" id="robot" name="gamemode" value="robot" />
+    <label for="robot">Against Robot</label>
   </div>
 
-<div class = "Players_order">
+  <p>Game Board</p>
+  <div>
+    <input type="radio" id="normal" name="gameboard" value="normal" required />
+    <label class="space1" for="normal">Normal 3x3 Grid</label>
+    <input type="radio" id="crazy" name="gameboard" value="crazy" />
+    <label for="crazy">Crazy 5x5 Grid</label>
+  </div>
+
   <p>Player 1 Go First?</p>
-</div>
-<div class = "Players_first" >
-  <input type="radio" id = "Yes" name="player1turn" value="yes" required />
-  <label for = "Yes">Yes</label>
-  <input type="radio" id = "No" name="player1turn" value="no" />
-  <label for = "No">No</label>
-</div>
-<div class = "Submit_Button">
-<input type="submit" value="submit" />
-</div>
+  <div>
+    <input type="radio" id="Yes" name="player1turn" value="yes" required />
+    <label class="space2" for="Yes">Yes</label>
+    <input type="radio" id="No" name="player1turn" value="no" />
+    <label for="No">No</label>
+  </div>
+
+  <div class="center"><input type="submit" value="Play" /></div>
 
 </form>
 

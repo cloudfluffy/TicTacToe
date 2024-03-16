@@ -22,8 +22,7 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-left: 5%;
-    padding-right: 5%;
+    padding: 0 5%;
     background-color: #FF9B6A;
     height: 3rem;
 }
@@ -75,127 +74,58 @@ footer * {
 
 /* Button CSS */
 .btn {
-    padding: 0 10px 0 10px;
-    border-radius: 10px;
+    padding: 0 20px;
+    border-radius: 15px;
     background-color: #D9D9D9;
 }
+
 .btn:hover {
     background-color: #262626;
     color: #ffffff;
     cursor: pointer;
 }
 
-/*
-Game_Mode class
-move to the middle by translating 30% toward the right horizontally and 50% vertically down
-positive is down 
-*/
-.Game_Mode {
+/* Form CSS */
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+form[action="/play"] * {
     font-size: xx-large;
-    transform: translate(30%, 50%);
-} 
-/*
-the layout of the shape surrouding the "Local Mutiplayer" and "Against Robot" 
-*/
-.Game_Mode label,
-.Game_Mode input
-{
-  width: 100px;
-  height: 50px;
-  border-radius: 15px;
-  background-color: #D9D9D9;
-  margin-right: 130px;
-  padding: 0;
-  cursor: pointer;
-/* allow mouse to click */
-}
-/*
-remove the radio input button circle
-*/
-.Game_Mode input[type = "radio"]
-{
-  display: none;
-}
-/*
-if the input is checked then the label will label with red.
-*/
-.Game_Mode input[type = "radio"]:checked + label,
-.Checked + label
-{
-    background: red;
 }
 
-.Game_Board {
-    font-size: xx-large;
-    transform: translate(30%,100%);
-}
-.Game_Board label,
-.Game_Board input
-{
-  width: 100px;
-  height: 50px;
-  border-radius: 15px;
-  background-color: #D9D9D9;
-  margin-right: 150px;
-  padding: 0;
-  cursor: pointer;
-}
-.Game_Board input[type = "radio"]
-{
-  display: none;
+form[action="/play"] p {
+    margin-bottom: 10px;
 }
 
-.Game_Board input[type = "radio"]:checked + label,
-.Checked + label
-{
-    background: red;
+form[action="/play"] p + div {
+    margin-bottom: 30px;
 }
 
-.Players_order {
-    font-size: xx-large;
-    transform: translate(30%,300%);
-}
-
-.Players_first
-{
-    font-size: xx-large;
-    transform: translate(35%,300%);
-}
-
-.Players_first label,
-.Players_first input
-{
-  width: 100px;
-  border-radius: 15px;
-  background-color: #D9D9D9;
-  margin-right: 150px;
-  margin-left: 70px;
-  cursor: pointer;
-}
-.Players_first input[type = "radio"]
-{
+input[type="radio"] {
     display: none;
 }
 
-.Players_first input[type = "radio"]:checked+label,
-.Checked+label
-{
-    background-color: red;
+input[type="radio"]:checked + label {
+    background: red;
 }
-.Submit_Button
-{
-    transform: translate(48%,400%);
-    
-}
-.Submit_Button input 
-{
-    width: 100px;
+
+label, input[type="submit"] {
     border-radius: 15px;
+    padding: 0 20px;
     background-color: #D9D9D9;
-    font-size: xx-large;
     cursor: pointer;
 }
-.Submit_Button input:hover
-{
-    background-color: red;
+
+input[type="submit"]:hover, input[type="radio"]:not(:checked) + label:hover {
+    background-color: #262626;
+    color: #ffffff;
 }
+
+.space { margin-right: 130px; }
+
+.space1 { margin-right: 145px; }
+
+.space2 { margin-right: 100px; }
