@@ -11,8 +11,18 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.post("/play", function (req, res) {
     isStartingPage = false;
-    console.log(req.body);
-    res.render("normal_grid.ejs", { "isStartingPage": isStartingPage });
+    const gameboard = req.body.gameboard;
+    const config = {
+        "isStartingPage": isStartingPage,
+        "gamemode": req.body.gamemode,
+        "player1turn": req.body.player1turn
+    };
+
+    if (gameboard === "normal") {
+        res.render("normal_grid.ejs", config);
+    } else {
+        res.render("crazy_grid.ejs", config);
+    }
 });
 
 app.get("/", function (req, res) {
