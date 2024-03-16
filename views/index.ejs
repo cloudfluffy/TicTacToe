@@ -1,25 +1,36 @@
 <%- include("partials/header.ejs") %>
 
 <form action="/play" method="GET">
+
+  <div class = "Game_Mode">
   <p>Game Mode</p>
-  <label>Local Multiplayer</label>
-  <input type="radio" name="gamemode" value="multiplayer" required />
-  <label>Against Robot</label>
-  <input type="radio" name="gamemode" value="robot" />
+  <input type="radio" id = "multiplayer" name="gamemode" value="multiplayer" required />
+  <label for="multiplayer">Local Multiplayer</label>
+  <input type="radio" id = "robot" name="gamemode" value="robot" />
+  <label for="robot">Against Robot</label>
+  </div>  
 
+  <div class = "Game_Board">
   <p>Game Board</p>
-  <label>Normal 3x3 Grid</label>
-  <input type="radio" name="gameboard" value="normal" required />
-  <label>Crazy 5x5 Grid</label>
-  <input type="radio" name="gameboard" value="crazy" />
-  
-  <p>Player 1 Go First?</p>
-  <label>Yes</label>
-  <input type="radio" name="player1turn" value="yes" required />
-  <label>No</label>
-  <input type="radio" name="player1turn" value="no" />
+  <input type="radio" id = "normal" name="gameboard" value="normal" required />
+  <label for = "normal">Normal 3x3 Grid</label>
+  <input type="radio" id = "crazy" name="gameboard" value="crazy"  />
+  <label for = "crazy">Crazy 5x5 Grid</label>
+  </div>
 
-  <input type="submit" value="Submit" />
+<div class = "Players_order">
+  <p>Player 1 Go First?</p>
+</div>
+<div class = "Players_first" >
+  <input type="radio" id = "Yes" name="player1turn" value="yes" required />
+  <label for = "Yes">Yes</label>
+  <input type="radio" id = "No" name="player1turn" value="no" />
+  <label for = "No">No</label>
+</div>
+<div class = "Submit_Button">
+<input type="submit" value="submit" />
+</div>
+
 </form>
 
 <%- include("partials/footer.ejs") %>
