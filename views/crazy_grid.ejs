@@ -1,5 +1,53 @@
 <%- include("partials/header.ejs") %>
+<div>
+    <div class="to_close_up">
+    <div class="crazy_grid">
+    <span class="crazy_grid_overwrite"></span>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    </div>
 
-
-
+<div class="crazy_players_stat">
+    <div>
+        <p>Player 1</p>
+        <div>Wins 0</div>
+        <div>Loses 0</div>
+    </div>
+    <div>
+        <p>
+            <% if (gamemode === "multiplayer") { %>
+              Player 2
+              <% } else { %>
+              Robot
+              <% } %>
+        </p>
+        <div>Wins 0</div>
+        <div>Loses 0</div>
+        </div>
+    </div>
+</div>
 <%- include("partials/footer.ejs") %>
