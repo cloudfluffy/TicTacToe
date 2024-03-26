@@ -32,7 +32,7 @@
     </div>
   </div>
 
-  <div class="crazy_player_stats">
+  <div class="player_stats">
     <div>
       <p>Player 1</p>
       <div>Wins 0 Loses 0</div>
@@ -50,5 +50,12 @@
     </div>
   </div>
 </div>
+
+<script>
+  const isStartinPage = "<%= isStartingPage %>";
+  const gamemode = "<%= gamemode %>";
+  const gameboard = "<%= gameboard %>";
+  const player1turn = "<%= player1turn %>";
+</script>
 
 <%- include("partials/footer.ejs") %>

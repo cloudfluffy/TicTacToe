@@ -11,21 +11,25 @@
 
   <p>Game Board</p>
   <div>
-    <input type="radio" id="normal" name="gameboard" value="normal" required />
+    <input type="radio" id="normal" name="gameboard" value="  " required />
     <label class="space1" for="normal">Normal 3x3 Grid</label>
-    <input type="radio" id="crazy" name="gameboard" value="crazy" />
+    <input type="radio" id="crazy" name="gameboard" value="crazy_grid" />
     <label for="crazy">Crazy 5x5 Grid</label>
   </div>
 
   <p>Player 1 Go First?</p>
   <div>
-    <input type="radio" id="Yes" name="player1turn" value="yes" required />
+    <input type="radio" id="Yes" name="player1turn" value="true" required />
     <label class="space2" for="Yes">Yes</label>
-    <input type="radio" id="No" name="player1turn" value="no" />
+    <input type="radio" id="No" name="player1turn" value="false" />
     <label for="No">No</label>
   </div>
 
   <div class="center"><input type="submit" value="Play" /></div>
 </form>
+
+<script>
+  const isStartingPage = "<%= isStartingPage %>";
+</script>
 
 <%- include("partials/footer.ejs") %>

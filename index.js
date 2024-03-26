@@ -15,10 +15,11 @@ app.post("/play", function (req, res) {
     const config = {
         "isStartingPage": isStartingPage,
         "gamemode": req.body.gamemode,
+        "gameboard": gameboard,
         "player1turn": req.body.player1turn
     };
 
-    if (gameboard === "normal") {
+    if (gameboard === "normal_grid") {
         res.render("normal_grid.ejs", config);
     } else {
         res.render("crazy_grid.ejs", config);

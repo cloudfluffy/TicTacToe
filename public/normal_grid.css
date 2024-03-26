@@ -1,12 +1,8 @@
-.normal_grid,
-.player_stats {
-    width: 430px;
-}
-
 .normal_grid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
+    width: 430px;
     height: 430px;
     margin-bottom: 20px;
 }
