@@ -1,50 +1,28 @@
-.crazy_grid
-{
+.crazy_grid {
     display: grid;
-    grid-template-columns: repeat(5,1fr);
-    grid-template-rows: repeat(5,1fr);
-    width: 600px;
-    margin-bottom: 30px;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    width: 470px;
+    height: 470px;
+    margin-bottom: 20px;
 }
 
 /* set the position to the center using properties of the flexbox */
-.crazy_grid div
-{
+.crazy_grid div {
     border: 5px solid black;
     background-color: #FFF7F1;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100px;
 }
 
-/* set the position relative to the div determined position, which is center */
-.to_close_up
-{
-    position: relative;
-}
-
-/* cover the with white border position at the top left corner then go from top left to bottom right to the entire grid*/
-.crazy_grid_overwrite
-{
-    position:absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    border: 6px solid #FFF7F1;
-}
-
-.crazy_players_stat
-{
+.crazy_player_stats {
     display: flex;
     justify-content: space-between;
 }
 
-.crazy_players_stat>div
-{
-    background-color: rgb(157, 176, 182);
-    padding: 5px 15px;
+.crazy_player_stats>div {
+    background-color: #D9D9D9;
+    padding: 5px 20px;
     border-radius: 15px;
-    gap:10px;
 }
