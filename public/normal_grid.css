@@ -26,6 +26,7 @@
     left: 0;
     right: 0;
     border: 5px solid #FFF7F1;
+    pointer-events: none;
 }
 
 .player_stats {
