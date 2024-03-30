@@ -28,15 +28,7 @@ app.post("/play", function (req, res) {
 
 app.get("/", function (req, res) {
     isStartingPage = true;
-    //
-    res.render("normal_grid.ejs", {
-        "isStartingPage": isStartingPage,
-        "gamemode": "multiplayer",
-        "gameboard": "normal_grid",
-        "player1turn": true
-    });
-    //
-    //res.render("index.ejs", { "isStartingPage": isStartingPage });
+    res.render("index.ejs", { "isStartingPage": isStartingPage });
 });
 
 app.listen(port, function () {

@@ -1,8 +1,16 @@
 const X = `<svg width="90%" height="90%" viewBox="0 0 170 170" fill="none" xmlns="http://www.w3.org/2000/svg"><rect y="141.421" width="200" height="40" rx="20" transform="rotate(-45 0 141.421)" fill="#FF5151" /><rect x="28.2843" width="200" height="40" rx="20" transform="rotate(45 28.2843 0)" fill="#FF5151" /></svg>`;
 const O = `<svg width="90%" height="90%" viewBox="0 0 165 165" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M150 82.5C150 119.779 119.779 150 82.5 150C45.2208 150 15 119.779 15 82.5C15 45.2208 45.2208 15 82.5 15C119.779 15 150 45.2208 150 82.5Z" stroke="#161E54" stroke-width="30" /></svg>`;
 const board = [];
-const boardSize = 3;
 const boardDiv = `.${gameboard} div`;
+let boardSize;
+let winCondition;
+if (gameboard === "normal_grid") {
+    boardSize = 3;
+    winCondition = 3;
+} else {
+    boardSize = 5;
+    winCondition = 4;
+}
 let isPlayer1Turn;
 
 start();
@@ -54,21 +62,23 @@ function addEventListenerToDiv() {
 
         if (isPlayer1Turn) {
             $(this).html(X);
-            $(this).off("click");
+            $(this).off();
             isPlayer1Turn = false;
             board[row][column] = "X";
         } else {
             $(this).html(O);
-            $(this).off("click");
+            $(this).off();
             isPlayer1Turn = true;
             board[row][column] = "O";
         }
 
-        printBoard();
-        console.log(checkWin(boardSize));
+        if (checkWin(winCondition)) {
+            $(boardDiv).off();
+            restart();
+        }
 
-        if (checkWin(boardSize)) {
-            $(boardDiv).off("click");
+        if (checkTie()) {
+            $(boardDiv).off();
             restart();
         }
     });
@@ -118,11 +128,49 @@ function checkVertical(n) {
 
 /* Check all main diagonal winning condition */
 function checkMainDiagonal(n) {
+    for (let row = 0; row < board.length - n + 1; row++) {
+        let counter = 0;
+        for (let column = 0; column < board.length - n + 1; column++) {
+            let y = row;
+            let x = column;
+            if (board[y][x] !== "-") {
+                counter++;
+                while (y < board.length - 1 && x < board.length - 1 && board[y + 1][x + 1] == board[y][x]) {
+                    counter++;
+                    y++;
+                    x++;
+                }
+                if (counter == n) {
+                    return true;
+                }
+                counter = 0;
+            }
+        }
+    }
     return false;
 }
 
 /* Check all minor diagonal winning condition */
 function checkMinorDiagonal(n) {
+    for (let row = 0; row < board.length - n + 1; row++) {
+        let counter = 0;
+        for (let column = board.length - 1; column - n + 1 >= 0; column--) {
+            let y = row;
+            let x = column;
+            if (board[y][x] !== "-") {
+                counter++;
+                while (y < board.length - 1 && x > 0 && board[y + 1][x - 1] === board[y][x]) {
+                    counter++;
+                    y++;
+                    x--;
+                }
+                if (counter === n) {
+                    return true;
+                }
+                counter = 0;
+            }
+        }
+    }
     return false;
 }
 
@@ -132,8 +180,15 @@ function checkWin(n) {
 }
 
 /* Check for tie */
-function checkTie(n) {
-
+function checkTie() {
+    for (let row = 0; row < board.length; row++) {
+        for (let column = 0; column < board.length; column++) {
+            if (board[row][column] === "-") {
+                return false;
+            }
+        }
+    }
+    return true;
 }
 
 /* Set up an 2D array representation of the grid */
