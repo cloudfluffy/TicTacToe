@@ -1,7 +1,10 @@
 const X = `<svg width="90%" height="90%" viewBox="0 0 170 170" fill="none" xmlns="http://www.w3.org/2000/svg"><rect y="141.421" width="200" height="40" rx="20" transform="rotate(-45 0 141.421)" fill="#FF5151" /><rect x="28.2843" width="200" height="40" rx="20" transform="rotate(45 28.2843 0)" fill="#FF5151" /></svg>`;
 const O = `<svg width="90%" height="90%" viewBox="0 0 165 165" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M150 82.5C150 119.779 119.779 150 82.5 150C45.2208 150 15 119.779 15 82.5C15 45.2208 45.2208 15 82.5 15C119.779 15 150 45.2208 150 82.5Z" stroke="#161E54" stroke-width="30" /></svg>`;
+const Xicon = `<svg width="14px" height="14px" viewBox="0 0 170 170" fill="none" xmlns="http://www.w3.org/2000/svg"><rect y="141.421" width="200" height="40" rx="20" transform="rotate(-45 0 141.421)" fill="#FF5151" /><rect x="28.2843" width="200" height="40" rx="20" transform="rotate(45 28.2843 0)" fill="#FF5151" /></svg>`;
+const Oicon = `<svg width="14px" height="14px" viewBox="0 0 165 165" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M150 82.5C150 119.779 119.779 150 82.5 150C45.2208 150 15 119.779 15 82.5C15 45.2208 45.2208 15 82.5 15C119.779 15 150 45.2208 150 82.5Z" stroke="#161E54" stroke-width="30" /></svg>`;
 const board = [];
 const boardDiv = `.${gameboard} div`;
+
 let boardSize;
 let winCondition;
 if (gameboard === "normal_grid") {
@@ -11,24 +14,36 @@ if (gameboard === "normal_grid") {
     boardSize = 5;
     winCondition = 4;
 }
-let isPlayer1Turn;
+
+let turn = 0;
 
 start();
 
-console.log(`Gamemode: ${gamemode}\nGameboard: ${gameboard}\nPlayer 1 go First? ${isPlayer1Turn}`);
+console.log(`Gamemode: ${gamemode}\nGameboard: ${gameboard}\nPlayer 1 go First? ${player1turn}`);
 
 function start() {
-    setFirstTurn();
+    if (player1turn === "true") {
+        $(".player1 p").addClass("first");
+        $(".player1 p").html(`${$(".player1 p").html()} ${Xicon}`);
+        $(".player2 p").addClass("second");
+        $(".player2 p").html(`${$(".player2 p").html()} ${Oicon}`);
+    } else {
+        $(".player1 p").addClass("second");
+        $(".player1 p").html(`${$(".player1 p").html()} ${Oicon}`);
+        $(".player2 p").addClass("first");
+        $(".player2 p").html(`${$(".player2 p").html()} ${Xicon}`);
+    }
     setBoard(boardSize);
     assignClassToDiv(boardSize);
     addEventListenerToDiv();
 }
 
 function restart() {
-    setFirstTurn();
-    setBoard(boardSize);
-    addEventListenerToDiv();
+    turn = 0;
     resetDiv();
+    setBoard(boardSize);
+    $(boardDiv).off();
+    addEventListenerToDiv();
 }
 
 /* Remove all html content inside each div in the grid */
@@ -60,19 +75,31 @@ function addEventListenerToDiv() {
         let row = parseInt(parts[0]);
         let column = parseInt(parts[1]);
 
-        if (isPlayer1Turn) {
+        if (turn % 2 === 0) {
             $(this).html(X);
-            $(this).off();
-            isPlayer1Turn = false;
             board[row][column] = "X";
         } else {
             $(this).html(O);
-            $(this).off();
-            isPlayer1Turn = true;
             board[row][column] = "O";
         }
 
+        turn++;
+        $(this).off();
+
         if (checkWin(winCondition)) {
+            if (player1turn === "true") {
+                if (turn % 2 == 1) {
+                    $(".player1 div span").text(parseInt($(".player1 div span").text()) + 1);
+                } else {
+                    $(".player2 div span").text(parseInt($(".player2 div span").text()) + 1);
+                }
+            } else {
+                if (turn % 2 == 1) {
+                    $(".player2 div span").text(parseInt($(".player2 div span").text()) + 1);
+                } else {
+                    $(".player1 div span").text(parseInt($(".player1 div span").text()) + 1);
+                }
+            }
             $(boardDiv).off();
             restart();
         }
@@ -82,6 +109,44 @@ function addEventListenerToDiv() {
             restart();
         }
     });
+}
+
+/* Set up an 2D array representation of the grid */
+function setBoard(n) {
+    for (let i = 0; i < n; i++) {
+        board[i] = [];
+        for (let j = 0; j < n; j++) {
+            board[i][j] = "-";
+        }
+    }
+}
+
+/* Prints the 2D array representation of the grid on the console */
+function printBoard() {
+    for (let i = 0; i < board.length; i++) {
+        let row = ""
+        for (let j = 0; j < board[i].length; j++) {
+            row += board[i][j] + " "
+        }
+        console.log(row)
+    }
+}
+
+/* Check for tie */
+function checkTie() {
+    for (let row = 0; row < board.length; row++) {
+        for (let column = 0; column < board.length; column++) {
+            if (board[row][column] === "-") {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+/* Check all winning condition */
+function checkWin(n) {
+    return checkHorizontal(n) || checkVertical(n) || checkMainDiagonal(n) || checkMinorDiagonal(n);
 }
 
 /* Check horizontal winning condition */
@@ -172,51 +237,4 @@ function checkMinorDiagonal(n) {
         }
     }
     return false;
-}
-
-/* Check all winning condition */
-function checkWin(n) {
-    return checkHorizontal(n) || checkVertical(n) || checkMainDiagonal(n) || checkMinorDiagonal(n);
-}
-
-/* Check for tie */
-function checkTie() {
-    for (let row = 0; row < board.length; row++) {
-        for (let column = 0; column < board.length; column++) {
-            if (board[row][column] === "-") {
-                return false;
-            }
-        }
-    }
-    return true;
-}
-
-/* Set up an 2D array representation of the grid */
-function setBoard(n) {
-    for (let i = 0; i < n; i++) {
-        board[i] = [];
-        for (let j = 0; j < n; j++) {
-            board[i][j] = "-";
-        }
-    }
-}
-
-/* Prints the 2D array representation of the grid on the console */
-function printBoard() {
-    for (let i = 0; i < board.length; i++) {
-        let row = ""
-        for (let j = 0; j < board[i].length; j++) {
-            row += board[i][j] + " "
-        }
-        console.log(row)
-    }
-}
-
-/* Determine who goes first in a new round */
-function setFirstTurn() {
-    if (player1turn === "true") {
-        isPlayer1Turn = true;
-    } else {
-        isPlayer1Turn = false;
-    }
 }
