@@ -1,5 +1,5 @@
-import express from "express";
 import bodyParser from "body-parser";
+import express from "express";
 
 const app = express();
 const port = 3000;
@@ -11,19 +11,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.post("/play", function (req, res) {
     isStartingPage = false;
-    const gameboard = req.body.gameboard;
     const config = {
         "isStartingPage": isStartingPage,
         "gamemode": req.body.gamemode,
-        "gameboard": gameboard,
         "player1turn": req.body.player1turn
     };
 
-    if (gameboard === "normal_grid") {
-        res.render("normal_grid.ejs", config);
-    } else {
-        res.render("crazy_grid.ejs", config);
-    }
+    res.render("normal_grid.ejs", config);
 });
 
 app.get("/", function (req, res) {

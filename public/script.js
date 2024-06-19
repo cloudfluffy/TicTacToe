@@ -3,26 +3,16 @@ const O = `<svg width="90%" height="90%" viewBox="0 0 165 165" fill="none" xmlns
 const Xicon = `<svg width="14px" height="14px" viewBox="0 0 170 170" fill="none" xmlns="http://www.w3.org/2000/svg"><rect y="141.421" width="200" height="40" rx="20" transform="rotate(-45 0 141.421)" fill="#FF5151" /><rect x="28.2843" width="200" height="40" rx="20" transform="rotate(45 28.2843 0)" fill="#FF5151" /></svg>`;
 const Oicon = `<svg width="14px" height="14px" viewBox="0 0 165 165" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M150 82.5C150 119.779 119.779 150 82.5 150C45.2208 150 15 119.779 15 82.5C15 45.2208 45.2208 15 82.5 15C119.779 15 150 45.2208 150 82.5Z" stroke="#161E54" stroke-width="30" /></svg>`;
 const board = [];
-const boardDiv = `.${gameboard} div`;
+const boardDiv = `.normal_grid div`;
+const boardSize = 3;
+const winCondition = 3;
 
 let availableMoves = [];
-let boardSize;
-let winCondition;
 let turn = 0;
-
-console.log(`Gamemode: ${gamemode}\nGameboard: ${gameboard}\nPlayer 1 go First? ${player1turn}`);
 
 start();
 
 function start() {
-    if (gameboard === "normal_grid") {
-        boardSize = 3;
-        winCondition = 3;
-    } else {
-        boardSize = 5;
-        winCondition = 4;
-    }
-
     if (player1turn === "true") {
         $(".player1 p").addClass("first");
         $(".player1 p").html(`${$(".player1 p").html()} ${Xicon}`);
